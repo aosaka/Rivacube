@@ -1,0 +1,88 @@
+# ライブラリのインポート
+import pandas as pd
+from sklearn.cluster import KMeans
+
+dat10 = pd.read_csv("2010_11.csv")
+dat11 = pd.read_csv("2011_12.csv")
+dat12 = pd.read_csv("2012_13.csv")
+dat13 = pd.read_csv("2013_14.csv")
+dat14 = pd.read_csv("2014_15.csv")
+dat15 = pd.read_csv("2015_16.csv")
+dat16 = pd.read_csv("2016_17.csv")
+dat17 = pd.read_csv("2017_18.csv")
+dat18 = pd.read_csv("2018_19.csv")
+dat19 = pd.read_csv("2019_20.csv")
+dat20 = pd.read_csv("2020_21.csv")
+dat21 = pd.read_csv("2021_22.csv")
+names = pd.read_csv("county_name.csv")
+
+dat0 = dat10.drop('Country/Region',axis=1)
+dat1 = dat11.drop('Country/Region',axis=1)
+dat2 = dat12.drop('Country/Region',axis=1)
+dat3 = dat13.drop('Country/Region',axis=1)
+dat4 = dat14.drop('Country/Region',axis=1)
+dat5 = dat15.drop('Country/Region',axis=1)
+dat6 = dat16.drop('Country/Region',axis=1)
+dat7 = dat17.drop('Country/Region',axis=1)
+dat8 = dat18.drop('Country/Region',axis=1)
+dat9 = dat19.drop('Country/Region',axis=1)
+dat2_0 = dat20.drop('Country/Region',axis=1)
+dat2_1 = dat21.drop('Country/Region',axis=1)
+
+dat0_std = (dat0-dat0.mean())/dat0.std(ddof=0)
+dat1_std = (dat1-dat1.mean())/dat1.std(ddof=0)
+dat2_std = (dat2-dat2.mean())/dat2.std(ddof=0)
+dat3_std = (dat3-dat3.mean())/dat3.std(ddof=0)
+dat4_std = (dat4-dat4.mean())/dat4.std(ddof=0)
+dat5_std = (dat5-dat5.mean())/dat5.std(ddof=0)
+dat6_std = (dat6-dat6.mean())/dat6.std(ddof=0)
+dat7_std = (dat7-dat7.mean())/dat7.std(ddof=0)
+dat8_std = (dat8-dat8.mean())/dat8.std(ddof=0)
+dat9_std = (dat9-dat9.mean())/dat9.std(ddof=0)
+dat2_0_std = (dat2_0-dat2_0.mean())/dat2_0.std(ddof=0)
+dat2_1_std = (dat2_1-dat2_1.mean())/dat2_1.std(ddof=0)
+
+# KMeansメソッドの実行
+clu = KMeans(n_clusters=5)
+
+# 結果の出力
+dat0_std["class"] = clu.fit_predict(dat0_std)
+dat1_std["class"] = clu.fit_predict(dat1_std)
+dat2_std["class"] = clu.fit_predict(dat2_std)
+dat3_std["class"] = clu.fit_predict(dat3_std)
+dat4_std["class"] = clu.fit_predict(dat4_std)
+dat5_std["class"] = clu.fit_predict(dat5_std)
+dat6_std["class"] = clu.fit_predict(dat6_std)
+dat7_std["class"] = clu.fit_predict(dat7_std)
+dat8_std["class"] = clu.fit_predict(dat8_std)
+dat9_std["class"] = clu.fit_predict(dat9_std)
+dat2_0_std["class"] = clu.fit_predict(dat2_0_std)
+dat2_1_std["class"] = clu.fit_predict(dat2_1_std)
+dat0_std["Country/Region"] = names["Country/Region"]
+dat1_std["Country/Region"] = names["Country/Region"]
+dat2_std["Country/Region"] = names["Country/Region"]
+dat3_std["Country/Region"] = names["Country/Region"]
+dat4_std["Country/Region"] = names["Country/Region"]
+dat5_std["Country/Region"] = names["Country/Region"]
+dat6_std["Country/Region"] = names["Country/Region"]
+dat7_std["Country/Region"] = names["Country/Region"]
+dat8_std["Country/Region"] = names["Country/Region"]
+dat9_std["Country/Region"] = names["Country/Region"]
+dat2_0_std["Country/Region"] = names["Country/Region"]
+dat2_1_std["Country/Region"] = names["Country/Region"]
+
+
+# 各グループの平均値
+# print('各グループの平均値')
+dat0_mean = dat0_std.groupby("class").mean()
+dat1_mean = dat1_std.groupby("class").mean()
+dat2_mean = dat2_std.groupby("class").mean()
+dat3_mean = dat3_std.groupby("class").mean()
+dat4_mean = dat4_std.groupby("class").mean()
+dat5_mean = dat5_std.groupby("class").mean()
+dat6_mean = dat6_std.groupby("class").mean()
+dat7_mean = dat7_std.groupby("class").mean()
+dat8_mean = dat8_std.groupby("class").mean()
+dat9_mean = dat9_std.groupby("class").mean()
+dat2_0_mean = dat2_0_std.groupby("class").mean()
+dat2_1_mean = dat2_1_std.groupby("class").mean()
